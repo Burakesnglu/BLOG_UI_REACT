@@ -14,6 +14,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import axios from 'axios';
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -32,13 +34,52 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const formData = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    };
+
+    const config = {
+      headers: {
+        'security-code': 'Gavofd23NJjsdW24w42F',
+      }
+    };
+
+    axios.post('http://localhost:4200/auth/login', formData, config)
+      .then(response => {
+        console.log(response)
+
+        switch (response.data.code) {
+          case 1:
+            console.log('loggedIn')
+            break;
+          case -1:
+            console.log('error')
+            break;
+          case -2:
+            console.log('cannot find user')
+            break;
+          case -3:
+            console.log('wrong password')
+            break;
+
+          default:
+            break;
+        }
+
+        if (response.data.code == 1) {
+          console.log('loggedIn')
+          // setSuccess(true)
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
   };
 
   return (
@@ -99,7 +140,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/sign-up" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
