@@ -13,8 +13,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Blog from './../blog/Blog'
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import axios from 'axios';
+import useToken from './../shared/UseToken';
+import userLayout from '../../layouts/user-layout/UserLayout'
 
 function Copyright(props) {
   return (
@@ -34,6 +38,8 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+
+  const { token, setToken } = useToken();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -55,6 +61,9 @@ export default function SignIn() {
 
         switch (response.data.code) {
           case 1:
+            setToken(response.data.data.token)
+            sessionStorage.setItem('user', response.data.data.user)
+            userLayout.setAuth(true)
             console.log('loggedIn')
             break;
           case -1:
@@ -84,7 +93,7 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" >
         <CssBaseline />
         <Box
           sx={{
