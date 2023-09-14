@@ -1,7 +1,13 @@
 import React from 'react'
+import UserLayout from '../../layouts/user-layout/UserLayout'
 
 export default function Blog() {
   return (
-    <div>Blog</div>
+    <>
+      <UserLayout />
+      <div className="container-fluid justify-center items-center">Blog
+
+      </div>
+    </>
   )
 }

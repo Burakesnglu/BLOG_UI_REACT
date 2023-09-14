@@ -40,6 +40,7 @@ const defaultTheme = createTheme();
 export default function SignIn() {
 
   const { token, setToken } = useToken();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -58,12 +59,16 @@ export default function SignIn() {
     axios.post('http://localhost:4200/auth/login', formData, config)
       .then(response => {
         console.log(response)
-
+        let body = response.data
         switch (response.data.code) {
           case 1:
-            setToken(response.data.data.token)
+            setToken(body.data.token)
             sessionStorage.setItem('user', response.data.data.user)
-            userLayout.setAuth(true)
+            if (body.Role == 'admin') {
+              navigate('/admin')
+            } else {
+              navigate('/')
+            }
             console.log('loggedIn')
             break;
           case -1:

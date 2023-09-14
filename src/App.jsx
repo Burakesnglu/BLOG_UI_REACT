@@ -9,20 +9,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
 
-  let role = 'User'
-
   return (
     <>
-      {role == 'Admin' ? (
-        <AdminLayout />
-      ) : (
-        <UserLayout />
-      )}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Blog />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/admin" element={<AdminLayout />} />
         </Routes>
       </BrowserRouter>
     </>
