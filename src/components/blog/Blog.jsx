@@ -1,13 +1,24 @@
 import React from 'react'
-import UserLayout from '../../layouts/user-layout/UserLayout'
+import Header from './Header'
+import LatestNews from './LatestNews'
+import EditorsPick from './EditorsPick'
+import CategoryBased from './CategoryBased'
+import Subscribe from './Subscribe'
 
 export default function Blog() {
   return (
     <>
-      <UserLayout />
-      <div className="container-fluid justify-center items-center">Blog
 
-      </div>
+      <Header />
+
+      <LatestNews />
+
+      <EditorsPick />
+
+      <CategoryBased />
+
+      <Subscribe />
+
     </>
   )
 }
