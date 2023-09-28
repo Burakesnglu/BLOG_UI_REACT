@@ -1,5 +1,6 @@
 import React from 'react'
 import UserMenu from '../../components/shared/UserMenu'
+import { Link } from "react-router-dom";
 
 export default function TopBar() {
 
@@ -9,9 +10,11 @@ export default function TopBar() {
                 <span className='text-red-600 text-xl font-bold'>LOGO</span>
                 <span>|</span>
                 <span>MENU</span>
-            </div> 
+            </div>
             <div className='col-span flex justify-end items-center'>
-                <button className='px-4 py-1 text-xs text-gray-700 font-semibold rounded-md border border-gray-300 transition-all ease-in-out hover:bg-gray-100' >Write</button>
+                <Link to='create-blog'>
+                    <button className='px-4 py-1 text-xs text-gray-700 font-semibold rounded-md border border-gray-300 transition-all ease-in-out hover:bg-gray-100' >Write</button>
+                </Link>
                 <span>
                     <UserMenu />
                 </span>
