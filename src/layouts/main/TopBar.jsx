@@ -7,7 +7,9 @@ export default function TopBar() {
     return (
         <div className='grid grid-cols-3 gap-4 w-full h-20 px-8 bg-white text-black top-0 sticky z-10'>
             <div className='col-span-2 gap-4 flex justify-start items-center'>
-                <span className='text-red-600 text-xl font-bold'>LOGO</span>
+                <Link to='/'>
+                    <span className='text-red-600 text-xl font-bold'>LOGO</span>
+                </Link>
                 <span>|</span>
                 <span>MENU</span>
             </div>

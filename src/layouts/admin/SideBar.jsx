@@ -2,28 +2,39 @@ import React from 'react'
 
 import { Navigation } from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
+import { useNavigate } from "react-router-dom";
 
 export default function SideBar() {
+    const navigate = useNavigate();
     return (
         <>
             <Navigation
                 // you can use your own router's api to get pathname
-                activeItemId="/management/members"
+                activeItemId="/admin"
                 onSelect={({ itemId }) => {
                     // maybe push to the route
+                    navigate(itemId)
                 }}
                 items={[
                     {
                         title: 'Dashboard',
-                        itemId: '/dashboard',
-                        // you can use your own custom Icon component as well
-                        // icon is optional
-                        elemBefore: () => 'a',
+                        itemId: '/admin',
+                        elemBefore: () => '',
+                    },
+                    {
+                        title: 'Blog',
+                        itemId: '/admin/blog',
+                        elemBefore: () => '',
+                    },
+                    {
+                        title: 'Tag',
+                        itemId: '/admin/tag',
+                        elemBefore: () => '',
                     },
                     {
                         title: 'Management',
                         itemId: '/management',
-                        elemBefore: () => 'b',
+                        elemBefore: () => '',
                         subNav: [
                             {
                                 title: 'Projects',
@@ -34,17 +45,7 @@ export default function SideBar() {
                                 itemId: '/management/members',
                             },
                         ],
-                    },
-                    {
-                        title: 'Another Item',
-                        itemId: '/another',
-                        subNav: [
-                            {
-                                title: 'Teams',
-                                itemId: '/management/teams',
-                            },
-                        ],
-                    },
+                    }
                 ]}
             />
         </>
